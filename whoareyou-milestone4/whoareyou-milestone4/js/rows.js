@@ -188,7 +188,7 @@ let setupRows = function (game) {
          if (gameEnded(playerId)) {
             // updateStats(game.guesses.length);
 
-            if (playerId == game.solution.id) {
+            if (playerId == game.solution[0].id) {
                 success();
             }
 
