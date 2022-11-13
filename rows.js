@@ -144,25 +144,6 @@ let setupRows = function (game) {
 
     function showStats(timeout) {
 
-        let interval = setInterval(function(date){
-            let actual = new Date()/1000;
-            let endDate = new Date();
-        
-            endDate.setHours(24);
-            endDate.setMinutes(0);
-            endDate.setSeconds(0);
-        
-            endDate = endDate/1000;
-        
-            let totalsec = endDate - actual;
-            let h = parseInt( totalsec / 3600 )
-            let m = parseInt( totalsec / 60 ) % 60;
-            let s = parseInt(totalsec % 60, 10);
-            let result = h + ":" + m + ":" + s;
-            
-            document.getElementById('nextPlayer').textContent = result;
-        },1000);
-
         return new Promise( (resolve, reject) =>  {
             setTimeout(() => {
                 document.body.appendChild(stringToHTML(headless(stats())));
@@ -289,6 +270,29 @@ let setupRows = function (game) {
             }
 
          }
+         
+         let interval = setInterval(function(date){
+            let actual = new Date()/1000;
+            let endDate = new Date();
+        
+            endDate.setHours(24);
+            endDate.setMinutes(0);
+            endDate.setSeconds(0);
+        
+            endDate = endDate/1000;
+        
+            let totalsec = endDate - actual;
+            let h = parseInt( totalsec / 3600 )
+            let m = parseInt( totalsec / 60 ) % 60;
+            let s = parseInt(totalsec % 60, 10);
+            let result = h + ":" + m + ":" + s;
+            
+            document.getElementById('nextPlayer').textContent = result;
+        },1000);
+
+         document.getElementById('closedialog').addEventListener('click', ()=>{
+            clearInterval(interval);
+         });
         showContent(content, guess)
     }
 }
